@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>SignatureDoesNotMatch</Code><Message>The request signature we calculated does not match the signature you provided. Check your key and signing method.</Message><AWSAccessKeyId>AKIAJBIZLMJQ2O6DKIAA</AWSAccessKeyId><StringToSign>GET
+
+
+1511427600
+/gbstool/emails/2259/Task%202%20Senators.png</StringToSign><SignatureProvided>NToH7sScTGz8b9lC5tePZojXZm4=https://s3.amazonaws.com/gbstool/emails/2259/Task 2 Senators.png?AWSAccessKeyId=AKIAJBIZLMJQ2O6DKIAA</SignatureProvided><StringToSignBytes>47 45 54 0a 0a 0a 31 35 31 31 34 32 37 36 30 30 0a 2f 67 62 73 74 6f 6f 6c 2f 65 6d 61 69 6c 73 2f 32 32 35 39 2f 54 61 73 6b 25 32 30 32 25 32 30 53 65 6e 61 74 6f 72 73 2e 70 6e 67</StringToSignBytes><RequestId>DF7F21E48F6A5F66</RequestId><HostId>HDUXQBnFdU8ne+Y+3SeYnaaqrCr8BljCa0n5FsFfQCszDExSw5RmKbajurwSveA6VZXHFjYHRUc=</HostId></Error>

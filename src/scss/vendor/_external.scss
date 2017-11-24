@@ -1,69 +1,110 @@
 //I just dropped this in copied from Tanias example
-body {
-	background: #3E4649;
-	color: #f7f7f7;
-	font-family: 'Montserrat', sans-serif;
-}
-h1,
-h2 {
-	font-weight: bold;
-}
-p {
-	font-size: 16px;
-	color: #cdcdcd;
-}
-.navbar {
-	margin-bottom: 0;
-}
-.jumbotron {
-	background: #27A967;
-	color: white;
-	text-align: center;
-}
-.jumbotron p {
-	color: purple;
-	font-size: 26px;
-}
-.navbar-inverse {
-	background: #2E2F31;
-	border: 0;
-}
-.dropdown-menu {
-	background: #2E2F31;
-	border-radius: 0;
-	border: 0;
-}
-.navbar-inverse .navbar-nav li a {
-	color: #f7f7f7;
-	font-size: 16px;
-}
-.navbar-inverse .navbar-nav li a:hover {
-	background: #27A967;
-}
-.navbar-inverse .navbar-nav .dropdown-menu li a:hover {
-	background: #2C463C;
-}
-.dropdown-menu li a {
-	padding: 10px;
-}
-.btn-primary {
-	color: #fff;
-	background-color: transparent;
-	border-color: white;
-	margin-bottom: 5px;
-}
-.btn-primary:hover {
-	color: #27A967;
-	background-color: white;
-	border-color: white;
-}
-.glyphicon-large {
-	font-size: 100px;
-}
-.call-to-action {
-	text-align: center;
-}
-.call-to-action p {
-	margin-bottom: 30px;
-	font-family: sans-serif;
+#bootstrap-overrides {
+  body {
+  	background: #158cb9;  //Why does this change nothing?
+  	color: rgb(186, 221, 195);  //Why does this change nothing?
+  	font-family: 'Montserrat', sans-serif;
+  }
+  h1,
+  h2 {
+  	font-weight: bold;
+  }
+  p {
+  	font-size: 16px;
+  	color: #0f0e0e;
+  }
+  .navbar {
+  	margin-bottom: 0;
+  }
+  .page-header {
+    background: #27A967;
+  	color: white;
+  	text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    max-height: 100px;
+    h2, p {
+      display:inline-block;
+    }
+  }
+  // How to put on a media query for this jumbotron?
+  .jumbotron {
+  	background: #27A967;
+  	color: white;
+  	text-align: center;
+    margin-bottom: 0;
+  }
+  .jumbotron p {
+  	color: white;
+  	font-size: 26px;
+    font-weight:bold;
+  }
+  .navbar-inverse {
+  	background: #2E2F31;
+  	border: 0;
+  }
+  .dropdown-menu {
+  	background: #2E2F31;
+  	border-radius: 0;
+  	border: 0;
+  }
+  .navbar-inverse .navbar-nav li a {
+  	color: #f7f7f7;
+  	font-size: 16px;
+  }
+  .navbar-inverse .navbar-nav li a:hover {
+  	background: #27A967;
+  }
+  .navbar-inverse .navbar-nav .dropdown-menu li a:hover {
+  	background: #2C463C;
+  }
+  .dropdown-menu li a {
+  	padding: 10px;
+  }
+  .btn-primary {
+  	color: #fff;
+  	background-color: transparent;
+  	border-color: white;
+  	margin-bottom: 5px;
+  }
+  .btn-primary:hover {
+  	color: #27A967;
+  	background-color: white;
+  	border-color: white;
+  }
+  .glyphicon-large {
+  	font-size: 100px;
+  }
+  .my-data-container {
+  	text-align: center;
+    // display: flex;
+    // flex-direction: column;
+    // // align-items is what centered in left/right. But is there a simpler way? Margin: auto; yes
+    // align-items: center;
+    // justify-content: center;
+    padding: 20px 20px 20px 20px;
+    background-color: rgb(186, 221, 195);
+    p {
+    	margin-bottom: 30px;
+    	font-family: sans-serif;
+    }
+  }
+
+  //Formatting table
+  .congress-table {
+    // display: flex;
+    // justify-content: center;
+    margin: auto;
+    width: 90%; //takes up 90% of container
+    border: 1px solid black;
+    td,th,tr {
+      border: 1px solid black;
+      text-align: center;
+    }
+  }
+
+
+
 }
