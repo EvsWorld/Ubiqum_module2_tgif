@@ -28,9 +28,10 @@ var thElement = document.createElement('th');
 var tr, td, th, row, tbl, counter,
 // append heading row to table
 // var headElement = document.getElementById('tableHeadTag');
-// // The /**/ signifies that it accepts unlimited arguments.
-// headElement.forEach(function(/**/) {
+// The /**/ signifies that it accepts unlimited arguments.
 //
+// headElement.forEach(function(/**/) {
+//   arguments.forEach(desiredHead) {}
 // }
 
 
@@ -39,8 +40,9 @@ tbl = document.getElementById('senate-data');
 // Append row for each member
 counter = 0;
 
+// var buildTable = (/**/) =
 
-data.results[0].members.forEach(function(memberRow) {
+data.results[0].members.forEach(memberRow => {
   tbl.appendChild(document.createElement('tr'));
     counter ++;
     var a = document.createElement('td');
