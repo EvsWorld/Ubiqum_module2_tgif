@@ -25,57 +25,84 @@
 
 
 var thElement = document.createElement('th');
-var tr, td, th, row, tbl, counter,
+var tr, td, th, row, tbl, counter, i;
 // append heading row to table
-// var headElement = document.getElementById('tableHeadTag');
 // The /**/ signifies that it accepts unlimited arguments.
 //
-// headElement.forEach(function(/**/) {
-//   arguments.forEach(desiredHead) {}
-// }
 
 
+// The /**/ signifies that it accepts unlimited arguments.
+ function PopTable(/**/) {
+   tbl = document.getElementById('senate-data');
+   tbl.appendChild(document.createElement('tr'));
+   var a = document.createElement('th');
+   a.appendChild(document.createTextNode('Member Number'));
+   tbl.appendChild(a);
+   const argumentsArray = Array.from(arguments); //Makes array from 'arguments'
+   // converts the given properties in the js object to more readable heading
+   const prettyHeaders = argumentsArray.map((str) => {
+     // str.replace(/[_-]/g, " ");
+     return str
+          .toLowerCase()
+          .split('_') // splits the words that are seperated by underscores.
+          .map((word) => {
+            console.log("First capital letter: "+word[0]);
+            console.log("remain letters: "+ word.substr(1));
+            return word[0].toUpperCase() + word.substr(1);
+          })
+          .join(' '); // Re-joins the elements (words) seperated by spaces.
+   });
 
-tbl = document.getElementById('senate-data');
-// Append row for each member
-counter = 0;
+    for (i in arguments) {
+      var b = document.createElement('th');
+      b.appendChild(document.createTextNode(prettyHeaders[i]));
+      tbl.appendChild(b);
+    }
 
-// var buildTable = (/**/) =
+  counter = 0;
 
-data.results[0].members.forEach(memberRow => {
-  tbl.appendChild(document.createElement('tr'));
-    counter ++;
-    var a = document.createElement('td');
-    a.appendChild(document.createTextNode(counter));
-    tbl.appendChild(a);
+  data.results[0].members.forEach(memberRow => {
+    tbl.appendChild(document.createElement('tr'));
+      counter ++;
+      var a = document.createElement('td'); // Will this work if it's const?
+      a.appendChild(document.createTextNode(counter));
+      tbl.appendChild(a);
 
-    var b = document.createElement('td');
-    b.appendChild(document.createTextNode(memberRow.first_name));
-    tbl.appendChild(b);
+      for (i in arguments) {
+        var b = document.createElement('td');
+        b.appendChild(document.createTextNode(memberRow[arguments[i]]));
+        tbl.appendChild(b);
+      }
 
-    var c = document.createElement('td');
-    c.appendChild(document.createTextNode(memberRow.middle_name));
-    tbl.appendChild(c);
+      // Below is the manual version of the above loop
 
-    var d = document.createElement('td');
-    d.appendChild(document.createTextNode(memberRow.last_name));
-    tbl.appendChild(d);
+      // var b = document.createElement('td');
+      // b.appendChild(document.createTextNode(memberRow[arguments[0]]));
+      // tbl.appendChild(b);
+      // var c = document.createElement('td');
+      // c.appendChild(document.createTextNode(memberRow[arguments[1]]));
+      // tbl.appendChild(c);
+      // var d = document.createElement('td');
+      // d.appendChild(document.createTextNode(memberRow[arguments[2]]));
+      // tbl.appendChild(d);
+      // var e = document.createElement('td');
+      // e.appendChild(document.createTextNode(memberRow[arguments[3]]));
+      // tbl.appendChild(e);
+      // var f = document.createElement('td');
+      // f.appendChild(document.createTextNode(memberRow[arguments[4]]));
+      // tbl.appendChild(f);
+      // var g = document.createElement('td');
+      // g.appendChild(document.createTextNode(memberRow[arguments[5]]));
+      // tbl.appendChild(g);
+      // var h = document.createElement('td');
+      // h.appendChild(document.createTextNode(memberRow[arguments[6]]));
+      // tbl.appendChild(h);
+      // Why doesnt this work then?
+      // tbl.appendChild(document.createElement('td'));
+  });
+}
 
-    var e = document.createElement('td');
-    e.appendChild(document.createTextNode(memberRow.party));
-    tbl.appendChild(e);
-
-    var f = document.createElement('td');
-    f.appendChild(document.createTextNode(memberRow.total_votes));
-    tbl.appendChild(f);
-
-    // Why doesnt this work then?
-    // document.createElement('td').appendChild(document.createTextNode(data.results[0].members[0].last_name));
-    // tbl.appendChild(document.createElement('td'));
-});
-
-
-
+PopTable('first_name','middle_name','last_name','party', 'state', 'seniority', 'votes_with_party_pct','missed_votes');
 
 
 // document.getElementById('senate-data').innerHTML += '<div>X</div>' + miNuevoTexto + ' ' + unNombre;
