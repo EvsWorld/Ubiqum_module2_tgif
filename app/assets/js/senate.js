@@ -2405,4 +2405,4 @@ var data = {
       "votes_with_party_pct": "97.64"
     }]
   }]
-}
+};
