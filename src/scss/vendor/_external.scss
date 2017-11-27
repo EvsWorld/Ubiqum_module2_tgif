@@ -18,7 +18,7 @@
     margin-top: 0;
   }
   .page-header {
-    background: #27A967;
+    background: $header-color;
   	color: white;
     margin-bottom: 0;
     margin-top: 0;
@@ -39,7 +39,7 @@
   }
   // How to put on a media query for this jumbotron?
   .jumbotron {
-  	background: #27A967;
+  	background: $header-color;
   	color: white;
   	text-align: center;
     margin-bottom: 0;
@@ -78,8 +78,8 @@
   	margin-bottom: 5px;
   }
   .btn-primary:hover {
-  	color: #27A967;
-  	background-color: white;
+  	color: white;
+  	background-color: $header-color;
   	border-color: white;
   }
   .glyphicon-large {
@@ -106,9 +106,9 @@
     // justify-content: center;
     margin: auto;
     width: 90%; //takes up 90% of container
-    border: 1px solid black;
+    border: 1px solid $header-color;
     td,th,tr {
-      border: 1px solid black;
+      border: 1px solid  #000;
       text-align: center;
     }
   }
@@ -117,6 +117,7 @@
 
     .checkboxes {
       display:flex;
+      border: 1px solid $header-color;
     }
   }
 

@@ -25,65 +25,229 @@
 
 
 var thElement = document.createElement('th');
-var tr, td, th, row, tbl, counter, i;
+var tr, td, th, row, tbl, counter, i, fieldsArray, fieldsArr, partyArray, ptyArr, state, ptyFromForm, st;
+const fields = ['first_name','middle_name','last_name','party', 'state', 'seniority', 'votes_with_party_pct'];
 // append heading row to table
 // The /**/ signifies that it accepts unlimited arguments.
-//
 
+// function shouldShow (ptyArr, flds, st) {
+//   // Makes row if no parties are selected AND if no states are selected (starting configuration/ nothing selected)
+//   return ( (ptyArr.length === 0 && state === 'all') ||
+//   makes row for the parties and state selected or if all states are selected.
+//   (ptyArr.includes(mbr.party) && (state === mbr.state || state === 'all') ) );
+// };
 
-// The /**/ signifies that it accepts unlimited arguments.
- function PopTable(/**/) {
-   tbl = document.getElementById('senate-data');
+var rawStatesList = {
+    "all": "All",
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AS": "American Samoa",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "DC": "District Of Columbia",
+    "FM": "Federated States Of Micronesia",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "GU": "Guam",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MH": "Marshall Islands",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "MP": "Northern Mariana Islands",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PW": "Palau",
+    "PA": "Pennsylvania",
+    "PR": "Puerto Rico",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VI": "Virgin Islands",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming"
+};
+
+//console.log(Array.isArray(rawStatesList));
+console.log(Object.keys(rawStatesList)[2]);
+
+// Generates drop down box
+var sel = document.getElementById('stateSelect');
+for(var key in rawStatesList) {
+    var opt = document.createElement('option');
+    opt.innerHTML = rawStatesList[key];
+    opt.value = key;
+    // opt.value = rawStatesList[i][1];
+    sel.appendChild(opt);
+}
+
+// Makes headings. Takes the array 'fields'
+ function genHead (fieldsArray) {
+   tbl = document.getElementById('data-head');
+   tbl.innerHTML = '';
    tbl.appendChild(document.createElement('tr'));
    var a = document.createElement('th');
    a.appendChild(document.createTextNode('Member Number'));
    tbl.appendChild(a);
 
-   //Makes array from 'arguments'
-   const argumentsArray = Array.from(arguments);
-   // converts the given properties in the js object to more readable heading
-   const prettyHeaders = argumentsArray.map((str) => {
+   // Converts the given properties in the js object to more readable heading. // It isn't really necessary but was leftover from other method I was using.
+   const prettyHeaders = fieldsArray.map((str) => {
      return str
           .toLowerCase()
           .split('_') // splits the words that are seperated by underscores.
           .map((word) => {
-            console.log("First capital letter: "+word[0]);
-            console.log("remain letters: "+ word.substr(1));
+            // console.log("First capital letter: "+word[0]);
+            // console.log("remain letters: "+ word.substr(1));
             return word[0].toUpperCase() + word.substr(1);
           })
           .join(' '); // Re-joins the elements (words) seperated by spaces.
    });
     // Builds headers
-    for (i in arguments) {
+    for (i in fieldsArray) {
       var b = document.createElement('th');
       b.appendChild(document.createTextNode(prettyHeaders[i]));
       tbl.appendChild(b);
     }
+};
 
-  // Populates table body
-  counter = 0;
-  data.results[0].members.forEach(memberRow => {
-    tbl.appendChild(document.createElement('tr'));
-      counter ++;
-      var a = document.createElement('td'); // Will this work if it's const?
-      a.appendChild(document.createTextNode(counter));
-      tbl.appendChild(a);
+genHead(['Name', 'Party', 'state', 'years_in_office', 'votes_with_party_%']);
 
-      for (i in arguments) {
-        var b = document.createElement('td');
-        b.appendChild(document.createTextNode(memberRow[arguments[i]]));
-        tbl.appendChild(b);
-      }
-    });
+var ptyFromForm = [];
+var st = 'all';
+
+function fillBody (x, y, z) {
+  // Makes first cell of each row. Fills the senators index number in data object
+  tbl.appendChild(document.createElement('tr'));
+  var a = document.createElement('td'); // Will this work if it's const?
+  a.appendChild(document.createTextNode(mbrIndex));
+  tbl.appendChild(a);
+  var b = document.createElement('td');
+
+  // This for loop concatonates the first 3 fields (first, middle, last names) and puts them in a single td element and appends to row.
+  for (let i= 0; i < 3; i++) {
+    // console.log("i=" + i + " | fieldsArr=" + mbr[fieldsArr[i]] + ' | ');
+    if (mbr[fieldsArr[i]] != null) {
+      b.appendChild(document.createTextNode(' ' + mbr[fieldsArr[i]]));
+      tbl.appendChild(b);
+    }
   }
+  // This for loop loops over the remaining
+  for (let i=3; i < fieldsArr.length; i++) {
+    var c = document.createElement('td');
+    // console.log("i=" + i + " | fieldsArr=" + mbr[fieldsArr[i]] + ' | ');
+    c.appendChild(document.createTextNode(mbr[fieldsArr[i]]));
+    tbl.appendChild(c);
+  }
+}
 
-  PopTable('first_name','middle_name','last_name','party', 'state', 'seniority', 'votes_with_party_pct','missed_votes');
 
-  $('filterForm').change(function() {
-      // do something
-  }).click(function() {
-      // do something
+  // Populates table body. accepts an array for fields, an array for filter parameters, and a value for state
+function genTbleBody(fieldsArr, ptyArr, state) {
+  tbl = document.getElementById('data-body');
+  tbl.innerHTML = '';
+  for (var mbrIndex in data.results[0].members) {
+    let mbr = data.results[0].members[mbrIndex];
+    //How to package this into a function?
+    if ( (ptyArr.length === 0 && state === 'all') ||
+      //makes row for the parties and state selected or if all states are selected.
+      (ptyArr.includes(mbr.party) && (state === mbr.state || state === 'all') ) ) {
+
+      // Why doesn't this call? Do I have to put return statements on it?
+      fillBody(fieldsArr, ptyArr, state);
+
+      // // Makes first cell of each row. Fills the senators index number in data object
+      // tbl.appendChild(document.createElement('tr'));
+      // var a = document.createElement('td'); // Will this work if it's const?
+      // a.appendChild(document.createTextNode(mbrIndex));
+      // tbl.appendChild(a);
+      // var b = document.createElement('td');
+      //
+      // // This for loop concatonates the first 3 fields (first, middle, last names) and puts them in a single td element and appends to row.
+      // for (let i= 0; i < 3; i++) {
+      //   // console.log("i=" + i + " | fieldsArr=" + mbr[fieldsArr[i]] + ' | ');
+      //   if (mbr[fieldsArr[i]] != null) {
+      //     b.appendChild(document.createTextNode(' ' + mbr[fieldsArr[i]]));
+      //     tbl.appendChild(b);
+      //   }
+      // }
+      // // This for loop loops over the remaining
+      // for (let i=3; i < fieldsArr.length; i++) {
+      //   var c = document.createElement('td');
+      //   // console.log("i=" + i + " | fieldsArr=" + mbr[fieldsArr[i]] + ' | ');
+      //   c.appendChild(document.createTextNode(mbr[fieldsArr[i]]));
+      //   tbl.appendChild(c);
+      // }
+    }
+  }
+  if ( $('#data-body').is(':empty') ) {
+    // insert There are no independent/democratic/republican members in selected state.
+    document.getElementById('data-head').innerHTML = "There are no Congresspeople of this type in the state you selected.";
+    // displayNode.createElement(document.createTextNode("There are no Congresspeople of this type in the state you selected."));
+    // tbl.appendChild(d);
+  }
+}
+
+// function formToArray(vals) {
+//   let rep = documents.getElementById('rep').value;
+//   let dem = documents.getElementById('dem').value;
+//   let ind = documents.getElementById('ind').value;
+//   ptyFromForm.push();
+// };
+
+  genTbleBody(fields, ptyFromForm, st);
+
+//
+  $('#filterForm').change(function() {
+    ptyFromForm = [];
+    $("input:checkbox[name=Party]:checked").each(function(){
+      ptyFromForm.push($(this).val()); // push
+      console.log($(this));
+    });
+    let e = document.getElementById("stateSelect");
+    st = e.options[e.selectedIndex].value;
+    genHead(['Name', 'Party', 'state', 'years_in_office', 'votes_with_party_%']);
+    genTbleBody(fields, ptyFromForm, st); // Call form generator
+    console.log('ptyFromForm = ' + ptyFromForm + ' st = ' + st);
   });
+
+
+
+
+
+
+
       // Below is the manual version of the above loop
 
       // var b = document.createElement('td');
