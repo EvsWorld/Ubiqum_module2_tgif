@@ -1,7 +1,7 @@
 //I just dropped this in copied from Tanias example
 #bootstrap-overrides {
   body {
-  	background: #158cb9;  //Why does this change nothing?
+  	// background: #158cb9;  //Why does this change nothing?
   	color: rgb(186, 221, 195);  //Why does this change nothing?
   	font-family: 'Montserrat', sans-serif;
   }
@@ -15,19 +15,27 @@
   }
   .navbar {
   	margin-bottom: 0;
+    margin-top: 0;
   }
   .page-header {
     background: #27A967;
   	color: white;
-  	text-align: center;
     margin-bottom: 0;
     margin-top: 0;
     display: flex;
-    flex-direction: row;
-    max-height: 100px;
-    h2, p {
-      display:inline-block;
-    }
+    justify-content: space-between;
+    padding:0;
+    align-content: center;
+  }
+
+  .logo, .link {
+    display:flex;
+    margin: 5px;
+    // padding: 10px;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+
   }
   // How to put on a media query for this jumbotron?
   .jumbotron {
@@ -78,7 +86,7 @@
   	font-size: 100px;
   }
   .my-data-container {
-  	text-align: center;
+  	// text-align: center;
     // display: flex;
     // flex-direction: column;
     // // align-items is what centered in left/right. But is there a simpler way? Margin: auto; yes
@@ -102,6 +110,13 @@
     td,th,tr {
       border: 1px solid black;
       text-align: center;
+    }
+  }
+  #filterform {
+    display: flex;
+
+    .checkboxes {
+      display:flex;
     }
   }
 

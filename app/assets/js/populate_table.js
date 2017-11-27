@@ -38,10 +38,11 @@ var tr, td, th, row, tbl, counter, i;
    var a = document.createElement('th');
    a.appendChild(document.createTextNode('Member Number'));
    tbl.appendChild(a);
-   const argumentsArray = Array.from(arguments); //Makes array from 'arguments'
+
+   //Makes array from 'arguments'
+   const argumentsArray = Array.from(arguments);
    // converts the given properties in the js object to more readable heading
    const prettyHeaders = argumentsArray.map((str) => {
-     // str.replace(/[_-]/g, " ");
      return str
           .toLowerCase()
           .split('_') // splits the words that are seperated by underscores.
@@ -52,15 +53,15 @@ var tr, td, th, row, tbl, counter, i;
           })
           .join(' '); // Re-joins the elements (words) seperated by spaces.
    });
-
+    // Builds headers
     for (i in arguments) {
       var b = document.createElement('th');
       b.appendChild(document.createTextNode(prettyHeaders[i]));
       tbl.appendChild(b);
     }
 
+  // Populates table body
   counter = 0;
-
   data.results[0].members.forEach(memberRow => {
     tbl.appendChild(document.createElement('tr'));
       counter ++;
@@ -73,7 +74,16 @@ var tr, td, th, row, tbl, counter, i;
         b.appendChild(document.createTextNode(memberRow[arguments[i]]));
         tbl.appendChild(b);
       }
+    });
+  }
 
+  PopTable('first_name','middle_name','last_name','party', 'state', 'seniority', 'votes_with_party_pct','missed_votes');
+
+  $('filterForm').change(function() {
+      // do something
+  }).click(function() {
+      // do something
+  });
       // Below is the manual version of the above loop
 
       // var b = document.createElement('td');
@@ -99,10 +109,7 @@ var tr, td, th, row, tbl, counter, i;
       // tbl.appendChild(h);
       // Why doesnt this work then?
       // tbl.appendChild(document.createElement('td'));
-  });
-}
 
-PopTable('first_name','middle_name','last_name','party', 'state', 'seniority', 'votes_with_party_pct','missed_votes');
 
 
 // document.getElementById('senate-data').innerHTML += '<div>X</div>' + miNuevoTexto + ' ' + unNombre;
